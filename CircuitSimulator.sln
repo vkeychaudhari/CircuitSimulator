@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35017.193
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitSimulator", "CircuitSimulator\CircuitSimulator.csproj", "{AB0EADA5-0635-4567-BECD-CC72635A2A87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB0EADA5-0635-4567-BECD-CC72635A2A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB0EADA5-0635-4567-BECD-CC72635A2A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB0EADA5-0635-4567-BECD-CC72635A2A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB0EADA5-0635-4567-BECD-CC72635A2A87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C185D9BA-763D-4772-B7EE-DE49543571DE}
+	EndGlobalSection
+EndGlobal

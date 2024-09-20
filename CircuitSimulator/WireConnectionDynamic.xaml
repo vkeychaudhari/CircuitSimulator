@@ -1,0 +1,29 @@
+﻿<Window x:Class="CircuitSimulator.WireConnectionDynamic"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CircuitSimulator"
+        mc:Ignorable="d"
+        Title="WireConnectionDynamic" Height="450" Width="800">
+    <Canvas x:Name="CircuitCanvas" Background="LightGray">
+        <!-- Visual Representation of Battery -->
+        <Rectangle x:Name="BatteryShape" Width="50" Height="100" Fill="Blue" Canvas.Left="50" Canvas.Top="100"/>
+        <TextBlock Text="Battery" Canvas.Left="50" Canvas.Top="210"/>
+
+        <!-- Positive and Negative Terminals -->
+        <TextBlock x:Name="PositiveTerminal" Text="+" FontSize="16" Foreground="White" Canvas.Left="80" Canvas.Top="110"/>
+        <TextBlock x:Name="NegativeTerminal" Text="-" FontSize="16" Foreground="White" Canvas.Left="80" Canvas.Top="170"/>
+
+        <!-- Visual Representation of Light Bulb -->
+        <Ellipse x:Name="LightBulbShape" Width="50" Height="50" Fill="Gray" Canvas.Left="550" Canvas.Top="200"/>
+        <TextBlock Text="Light Bulb" Canvas.Left="600" Canvas.Top="300"/>
+
+        <!-- Dynamic Wires for Positive and Negative Terminals -->
+        <Path x:Name="PositiveWirePath" Stroke="Red" StrokeThickness="2"/>
+        <Path x:Name="NegativeWirePath" Stroke="Black" StrokeThickness="2"/>
+
+        <!-- Button to Reset the Circuit -->
+        <Button Content="Reset" Width="100" Height="30" Canvas.Left="50" Canvas.Top="300" Click="OnResetCircuit"/>
+    </Canvas>
+</Window>
