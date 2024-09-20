@@ -32,6 +32,8 @@ namespace CircuitSimulator
         private Wire negativeWire;
         private Circuit circuit;
 
+        private bool isSwitchOn = false;
+
         public WireConnectionDynamic()
         {
             InitializeComponent();
@@ -47,6 +49,21 @@ namespace CircuitSimulator
             CircuitCanvas.MouseMove += OnWireMove;
             CircuitCanvas.MouseLeftButtonUp += OnWireEnd;
         }
+
+        private void SwitchButton_Checked(object sender, RoutedEventArgs e)
+        {
+            isSwitchOn = true;
+            SwitchButton.Content = "Switch On";
+            UpdateCircuitState();
+        }
+
+        private void SwitchButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            isSwitchOn = false;
+            SwitchButton.Content = "Switch Off";
+            UpdateCircuitState();
+        }
+
 
         private void InitializeCircuit()
         {
@@ -86,18 +103,16 @@ namespace CircuitSimulator
                 Point mousePos = e.GetPosition(CircuitCanvas);
                 DrawWire(PositiveWirePath, positiveStartPoint, mousePos);
 
-                // Check if the positive wire is over the lightbulb
+                // Check if the wire is over the lightbulb
                 positiveWireConnected = IsMouseOverLightBulb(mousePos);
-                positiveWire.IsConnected = positiveWireConnected;
             }
             else if (negativeWireDragging)
             {
                 Point mousePos = e.GetPosition(CircuitCanvas);
                 DrawWire(NegativeWirePath, negativeStartPoint, mousePos);
 
-                // Check if the negative wire is over the lightbulb
+                // Check if the wire is over the lightbulb
                 negativeWireConnected = IsMouseOverLightBulb(mousePos);
-                negativeWire.IsConnected = negativeWireConnected;
             }
 
             UpdateCircuitState();
@@ -170,35 +185,25 @@ namespace CircuitSimulator
         // Check if the mouse is over the lightbulb
         private bool IsMouseOverLightBulb(Point position)
         {
-            return position.X >= Canvas.GetLeft(LightBulbShape) &&
-                   position.X <= Canvas.GetLeft(LightBulbShape) + LightBulbShape.Width &&
-                   position.Y >= Canvas.GetTop(LightBulbShape) &&
-                   position.Y <= Canvas.GetTop(LightBulbShape) + LightBulbShape.Height;
+            // Check if the mouse position (wire end) is close to the lightbulb's input node
+            Rect lightBulbBounds = new Rect(Canvas.GetLeft(LightBulbShape), Canvas.GetTop(LightBulbShape), LightBulbShape.Width, LightBulbShape.Height);
+            return lightBulbBounds.Contains(position);
         }
-
-        // Draw the wire from the start point to the current mouse position
-        //private void DrawWire(Path wirePath, Point startPoint, Point mousePos)
-        //{
-        //    PathGeometry geometry = new PathGeometry();
-        //    PathFigure figure = new PathFigure();
-        //    figure.StartPoint = startPoint;
-        //    figure.Segments.Add(new LineSegment(mousePos, true));
-        //    geometry.Figures.Add(figure);
-
-        //    wirePath.Data = geometry;
-        //}
-
         // Update the circuit state
         private void UpdateCircuitState()
         {
-            if (positiveWireConnected && negativeWireConnected)
+            // Check if both wires are connected and the switch is on
+            if (positiveWireConnected && negativeWireConnected && isSwitchOn)
             {
-                circuit.CalculateCurrent();
-                LightBulbShape.Fill = lightBulb.IsOn ? new SolidColorBrush(Colors.Yellow) : new SolidColorBrush(Colors.Gray);
+                // Turn on the light bulb
+                lightBulb.IsOn = true;
+                LightBulbShape.Fill = Brushes.Yellow; // Assuming LightBulbVisual is a visual representation of the lightbulb
             }
             else
             {
-                LightBulbShape.Fill = new SolidColorBrush(Colors.Gray);
+                // Turn off the light bulb
+                lightBulb.IsOn = false;
+                LightBulbShape.Fill = Brushes.Gray;
             }
         }
     }

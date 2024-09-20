@@ -25,5 +25,10 @@
 
         <!-- Button to Reset the Circuit -->
         <Button Content="Reset" Width="100" Height="30" Canvas.Left="50" Canvas.Top="300" Click="OnResetCircuit"/>
+
+        <!-- Toggle Button for the Switch -->
+        <ToggleButton x:Name="SwitchButton" Content="Switch Off" Width="100" Height="50"
+                      VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                      Checked="SwitchButton_Checked" Unchecked="SwitchButton_Unchecked"/>
     </Canvas>
 </Window>
